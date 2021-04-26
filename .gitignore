@@ -1,7 +1,3 @@
 build
 node_modules
-test
-coverage
 *.log
-package-lock.json
-yarn.lock
