@@ -81,27 +81,17 @@ export class ValueOrPromise<T> {
     }
   }
 
-  public getPromise(): PromiseLike<T> | undefined {
+  public resolve(): T | PromiseLike<T> | undefined | null {
     const state = this.state;
 
     if (state.status === 'pending') {
       return state.value;
     }
 
-    return undefined;
-  }
-
-  public getValue(): T | undefined | null {
-    const state = this.state;
-
     if (state.status === 'rejected') {
       throw state.value;
     }
 
-    if (state.status === 'fulfilled') {
-      return state.value;
-    }
-
-    return undefined;
+    return state.value;
   }
 }
