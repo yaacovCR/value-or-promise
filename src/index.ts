@@ -1,1 +1,1 @@
-export * from './PossiblePromise';
+export * from './ValueOrPromise';

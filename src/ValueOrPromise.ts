@@ -23,7 +23,7 @@ const defaultOnRejectedFn = (reason: unknown) => {
   throw reason;
 };
 
-export class PossiblePromise<T> {
+export class ValueOrPromise<T> {
   private readonly state: State<T>;
 
   constructor(executor: () => T | PromiseLike<T> | undefined | null) {
@@ -53,11 +53,11 @@ export class PossiblePromise<T> {
       | ((reason: unknown) => TResult2 | PromiseLike<TResult2>)
       | undefined
       | null
-  ): PossiblePromise<TResult1 | TResult2> {
+  ): ValueOrPromise<TResult1 | TResult2> {
     const state = this.state;
 
     if (state.status === 'pending') {
-      return new PossiblePromise(() =>
+      return new ValueOrPromise(() =>
         state.value.then(onFulfilled, onRejected)
       );
     }
@@ -66,7 +66,7 @@ export class PossiblePromise<T> {
       typeof onRejected === 'function' ? onRejected : defaultOnRejectedFn;
 
     if (state.status === 'rejected') {
-      return new PossiblePromise(() => onRejectedFn(state.value));
+      return new ValueOrPromise(() => onRejectedFn(state.value));
     }
 
     try {
@@ -74,10 +74,10 @@ export class PossiblePromise<T> {
         typeof onFulfilled === 'function' ? onFulfilled : undefined;
 
       return onFulfilledFn === undefined
-        ? new PossiblePromise(() => (state.value as unknown) as TResult1)
-        : new PossiblePromise(() => onFulfilledFn(state.value as T));
+        ? new ValueOrPromise(() => (state.value as unknown) as TResult1)
+        : new ValueOrPromise(() => onFulfilledFn(state.value as T));
     } catch (e) {
-      return new PossiblePromise(() => onRejectedFn(e));
+      return new ValueOrPromise(() => onRejectedFn(e));
     }
   }
 
