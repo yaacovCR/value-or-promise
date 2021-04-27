@@ -1,5 +1,11 @@
 # value-or-promise
 
+## 1.0.4
+
+### Patch Changes
+
+- a4eff20: add missing catch
+
 ## 1.0.3
 
 ### Patch Changes
