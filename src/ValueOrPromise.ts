@@ -81,6 +81,15 @@ export class ValueOrPromise<T> {
     }
   }
 
+  catch<TResult = never>(
+    onRejected:
+      | ((reason: unknown) => TResult | PromiseLike<TResult>)
+      | undefined
+      | null
+  ): ValueOrPromise<TResult> {
+    return this.then(undefined, onRejected);
+  }
+
   public resolve(): T | PromiseLike<T> | undefined | null {
     const state = this.state;
 
