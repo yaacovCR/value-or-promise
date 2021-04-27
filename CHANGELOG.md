@@ -1,5 +1,11 @@
 # value-or-promise
 
+## 1.0.5
+
+### Patch Changes
+
+- 4652893: fix published api
+
 ## 1.0.4
 
 ### Patch Changes
