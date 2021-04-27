@@ -44,7 +44,7 @@ export class ValueOrPromise<T> {
     this.state = { status: 'fulfilled', value };
   }
 
-  then<TResult1 = T, TResult2 = never>(
+  public then<TResult1 = T, TResult2 = never>(
     onFulfilled?:
       | ((value: T) => TResult1 | PromiseLike<TResult1>)
       | undefined
@@ -81,7 +81,7 @@ export class ValueOrPromise<T> {
     }
   }
 
-  catch<TResult = never>(
+  public catch<TResult = never>(
     onRejected:
       | ((reason: unknown) => TResult | PromiseLike<TResult>)
       | undefined
