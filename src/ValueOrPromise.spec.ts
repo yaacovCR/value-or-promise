@@ -38,4 +38,25 @@ describe('ValueOrPromise', () => {
       'Error'
     );
   });
+
+  it('works with ValueOrPromise.all for values', () => {
+    const valueOrPromise1 = new ValueOrPromise(() => 1);
+    const valueOrPromise2 = new ValueOrPromise(() => 2);
+    const all = ValueOrPromise.all([valueOrPromise1, valueOrPromise2]);
+    expect(all.resolve()).toEqual([1, 2]);
+  });
+
+  it('works with ValueOrPromise.all for promises', async () => {
+    const valueOrPromise1 = new ValueOrPromise(() => Promise.resolve(1));
+    const valueOrPromise2 = new ValueOrPromise(() => Promise.resolve(2));
+    const all = ValueOrPromise.all([valueOrPromise1, valueOrPromise2]);
+    expect(await all.resolve()).toEqual([1, 2]);
+  });
+
+  it('works with ValueOrPromise.all for mixture of values and promises', async () => {
+    const valueOrPromise1 = new ValueOrPromise(() => 1);
+    const valueOrPromise2 = new ValueOrPromise(() => Promise.resolve(2));
+    const all = ValueOrPromise.all([valueOrPromise1, valueOrPromise2]);
+    expect(await all.resolve()).toEqual([1, 2]);
+  });
 });

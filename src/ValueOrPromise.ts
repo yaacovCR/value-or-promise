@@ -94,4 +94,34 @@ export class ValueOrPromise<T> {
 
     return state.value;
   }
+
+  public static all<T>(
+    valueOrPromises: ReadonlyArray<ValueOrPromise<T>>
+  ): ValueOrPromise<Array<T | null | undefined>> {
+    const values: Array<T | null | undefined> = [];
+
+    for (let i = 0; i < valueOrPromises.length; i++) {
+      const valueOrPromise = valueOrPromises[i];
+
+      const state = valueOrPromise.state;
+
+      if (state.status === 'rejected') {
+        return new ValueOrPromise(() => {
+          throw state.value;
+        });
+      }
+
+      if (state.status === 'pending') {
+        return new ValueOrPromise(() =>
+          Promise.all(valueOrPromises.slice(i)).then((resolvedPromises) =>
+            values.concat(resolvedPromises)
+          )
+        );
+      }
+
+      values.push(state.value);
+    }
+
+    return new ValueOrPromise(() => values);
+  }
 }
