@@ -1,5 +1,11 @@
 # value-or-promise
 
+## 1.0.6
+
+### Patch Changes
+
+- a246304: fix(dependencies): no dependencies, please
+
 ## 1.0.5
 
 ### Patch Changes
