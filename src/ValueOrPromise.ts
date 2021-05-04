@@ -1,5 +1,7 @@
 function isPromiseLike<T>(object: unknown): object is PromiseLike<T> {
-  return object != null && typeof (object as Promise<T>).then === 'function';
+  return (
+    object != null && typeof (object as PromiseLike<T>).then === 'function'
+  );
 }
 
 interface FulfilledState<T> {
@@ -90,11 +92,11 @@ export class ValueOrPromise<T> {
     return this.then(undefined, onRejected);
   }
 
-  public resolve(): T | PromiseLike<T> | undefined | null {
+  public resolve(): T | Promise<T> | undefined | null {
     const state = this.state;
 
     if (state.status === 'pending') {
-      return state.value;
+      return Promise.resolve(state.value);
     }
 
     if (state.status === 'rejected') {
