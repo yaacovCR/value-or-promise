@@ -1,5 +1,13 @@
 # value-or-promise
 
+## 1.0.7
+
+### Patch Changes
+
+- 8366d7e: fix(resolve): always resolve to actual Promise
+
+  Even though ValueOrPromise objects can be initialized with anything PromiseLike, it is helpful to have them always resolve to either values or to actual promises.
+
 ## 1.0.6
 
 ### Patch Changes
