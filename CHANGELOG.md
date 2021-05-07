@@ -1,5 +1,11 @@
 # value-or-promise
 
+## 1.0.8
+
+### Patch Changes
+
+- 1b378e8: chore(docs): correct typo
+
 ## 1.0.7
 
 ### Patch Changes
