@@ -145,7 +145,7 @@ function myFunction() {
 
 ```js
 function myFunction() {
-    return Promise.resolve(getValueOrPromise())
+    return Promise.resolve(getValueOrPromise)
         .then(v => onValue(v));
 }
 ```
