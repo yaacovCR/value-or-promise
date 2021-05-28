@@ -1,5 +1,11 @@
 # value-or-promise
 
+## 1.0.9
+
+### Patch Changes
+
+- ade3f7d: fix(types): do not make results nullable
+
 ## 1.0.8
 
 ### Patch Changes
