@@ -92,7 +92,7 @@ export class ValueOrPromise<T> {
     return this.then(undefined, onRejected);
   }
 
-  public resolve(): T | Promise<T> | undefined | null {
+  public resolve(): T | Promise<T> {
     const state = this.state;
 
     if (state.status === 'pending') {
