@@ -197,7 +197,7 @@ export class ValueOrPromise<T> {
     valueOrPromises: ReadonlyArray<ValueOrPromise<T>>
   ): ValueOrPromise<Array<T>>;
   public static all<T>(
-    valueOrPromises: readonly ValueOrPromise<T>[]
+    valueOrPromises: ReadonlyArray<ValueOrPromise<T>>
   ): ValueOrPromise<Array<T>> {
     const values: Array<T> = [];
 
