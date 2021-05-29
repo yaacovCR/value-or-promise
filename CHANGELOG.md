@@ -1,5 +1,11 @@
 # value-or-promise
 
+## 1.0.10
+
+### Patch Changes
+
+- 7219d1c: fix(types): implementation signature should also be callable
+
 ## 1.0.9
 
 ### Patch Changes
