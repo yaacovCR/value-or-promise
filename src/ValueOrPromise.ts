@@ -106,26 +106,98 @@ export class ValueOrPromise<T> {
     return state.value;
   }
 
-  // prettier-ignore
-  public static all<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>, ValueOrPromise<T3>, ValueOrPromise<T4>, ValueOrPromise<T5>, ValueOrPromise<T6>, ValueOrPromise<T7>, ValueOrPromise<T8>, ValueOrPromise<T9>, ValueOrPromise<T10>]): ValueOrPromise<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10]>;
-  // prettier-ignore
-  public static all<T1, T2, T3, T4, T5, T6, T7, T8, T9>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>, ValueOrPromise<T3>, ValueOrPromise<T4>, ValueOrPromise<T5>, ValueOrPromise<T6>, ValueOrPromise<T7>, ValueOrPromise<T8>, ValueOrPromise<T9>]): ValueOrPromise<[T1, T2, T3, T4, T5, T6, T7, T8, T9]>;
-  // prettier-ignore
-  public static all<T1, T2, T3, T4, T5, T6, T7, T8>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>, ValueOrPromise<T3>, ValueOrPromise<T4>, ValueOrPromise<T5>, ValueOrPromise<T6>, ValueOrPromise<T7>, ValueOrPromise<T8>]): ValueOrPromise<[T1, T2, T3, T4, T5, T6, T7, T8]>;
-  // prettier-ignore
-  public static all<T1, T2, T3, T4, T5, T6, T7>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>, ValueOrPromise<T3>, ValueOrPromise<T4>, ValueOrPromise<T5>, ValueOrPromise<T6>, ValueOrPromise<T7>]): ValueOrPromise<[T1, T2, T3, T4, T5, T6, T7]>;
-  // prettier-ignore
-  public static all<T1, T2, T3, T4, T5, T6>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>, ValueOrPromise<T3>, ValueOrPromise<T4>, ValueOrPromise<T5>, ValueOrPromise<T6>]): ValueOrPromise<[T1, T2, T3, T4, T5, T6]>;
-  // prettier-ignore
-  public static all<T1, T2, T3, T4, T5>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>, ValueOrPromise<T3>, ValueOrPromise<T4>, ValueOrPromise<T5>]): ValueOrPromise<[T1, T2, T3, T4, T5]>;
-  // prettier-ignore
-  public static all<T1, T2, T3, T4>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>, ValueOrPromise<T3>, ValueOrPromise<T4>]): ValueOrPromise<[T1, T2, T3, T4]>;
-  // prettier-ignore
-  public static all<T1, T2, T3>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>, ValueOrPromise<T3>]): ValueOrPromise<[T1, T2, T3]>;
-  // prettier-ignore
-  public static all<T1, T2>(values: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>]): ValueOrPromise<[T1, T2]>;
+  public static all<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+    valueOrPromises: readonly [
+      ValueOrPromise<T1>,
+      ValueOrPromise<T2>,
+      ValueOrPromise<T3>,
+      ValueOrPromise<T4>,
+      ValueOrPromise<T5>,
+      ValueOrPromise<T6>,
+      ValueOrPromise<T7>,
+      ValueOrPromise<T8>,
+      ValueOrPromise<T9>,
+      ValueOrPromise<T10>
+    ]
+  ): ValueOrPromise<[T1, T2, T3, T4, T5, T6, T7, T8, T9, T10]>;
+  public static all<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+    valueOrPromises: readonly [
+      ValueOrPromise<T1>,
+      ValueOrPromise<T2>,
+      ValueOrPromise<T3>,
+      ValueOrPromise<T4>,
+      ValueOrPromise<T5>,
+      ValueOrPromise<T6>,
+      ValueOrPromise<T7>,
+      ValueOrPromise<T8>,
+      ValueOrPromise<T9>
+    ]
+  ): ValueOrPromise<[T1, T2, T3, T4, T5, T6, T7, T8, T9]>;
+  public static all<T1, T2, T3, T4, T5, T6, T7, T8>(
+    valueOrPromises: readonly [
+      ValueOrPromise<T1>,
+      ValueOrPromise<T2>,
+      ValueOrPromise<T3>,
+      ValueOrPromise<T4>,
+      ValueOrPromise<T5>,
+      ValueOrPromise<T6>,
+      ValueOrPromise<T7>,
+      ValueOrPromise<T8>
+    ]
+  ): ValueOrPromise<[T1, T2, T3, T4, T5, T6, T7, T8]>;
+  public static all<T1, T2, T3, T4, T5, T6, T7>(
+    valueOrPromises: readonly [
+      ValueOrPromise<T1>,
+      ValueOrPromise<T2>,
+      ValueOrPromise<T3>,
+      ValueOrPromise<T4>,
+      ValueOrPromise<T5>,
+      ValueOrPromise<T6>,
+      ValueOrPromise<T7>
+    ]
+  ): ValueOrPromise<[T1, T2, T3, T4, T5, T6, T7]>;
+  public static all<T1, T2, T3, T4, T5, T6>(
+    valueOrPromises: readonly [
+      ValueOrPromise<T1>,
+      ValueOrPromise<T2>,
+      ValueOrPromise<T3>,
+      ValueOrPromise<T4>,
+      ValueOrPromise<T5>,
+      ValueOrPromise<T6>
+    ]
+  ): ValueOrPromise<[T1, T2, T3, T4, T5, T6]>;
+  public static all<T1, T2, T3, T4, T5>(
+    valueOrPromises: readonly [
+      ValueOrPromise<T1>,
+      ValueOrPromise<T2>,
+      ValueOrPromise<T3>,
+      ValueOrPromise<T4>,
+      ValueOrPromise<T5>
+    ]
+  ): ValueOrPromise<[T1, T2, T3, T4, T5]>;
+  public static all<T1, T2, T3, T4>(
+    valueOrPromises: readonly [
+      ValueOrPromise<T1>,
+      ValueOrPromise<T2>,
+      ValueOrPromise<T3>,
+      ValueOrPromise<T4>
+    ]
+  ): ValueOrPromise<[T1, T2, T3, T4]>;
+  public static all<T1, T2, T3>(
+    valueOrPromises: readonly [
+      ValueOrPromise<T1>,
+      ValueOrPromise<T2>,
+      ValueOrPromise<T3>
+    ]
+  ): ValueOrPromise<[T1, T2, T3]>;
+  public static all<T1, T2>(
+    valueOrPromises: readonly [ValueOrPromise<T1>, ValueOrPromise<T2>]
+  ): ValueOrPromise<[T1, T2]>;
   public static all<T>(
     valueOrPromises: ReadonlyArray<ValueOrPromise<T>>
+  ): ValueOrPromise<Array<T>>;
+  public static all<T>(
+    valueOrPromises: readonly ValueOrPromise<T>[]
   ): ValueOrPromise<Array<T>> {
     const values: Array<T> = [];
 
