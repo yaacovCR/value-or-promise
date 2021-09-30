@@ -199,11 +199,10 @@ export class ValueOrPromise<T> {
   public static all<T>(
     valueOrPromises: ReadonlyArray<ValueOrPromise<T>>
   ): ValueOrPromise<Array<T>> {
-    const values: Array<T> = [];
+    let containsPromise = false;
 
-    for (let i = 0; i < valueOrPromises.length; i++) {
-      const valueOrPromise = valueOrPromises[i];
-
+    const values: Array<T | PromiseLike<T>> = [];
+    for (const valueOrPromise of valueOrPromises) {
       const state = valueOrPromise.state;
 
       if (state.status === 'rejected') {
@@ -213,16 +212,16 @@ export class ValueOrPromise<T> {
       }
 
       if (state.status === 'pending') {
-        return new ValueOrPromise(() =>
-          Promise.all(valueOrPromises.slice(i)).then((resolvedPromises) =>
-            values.concat(resolvedPromises)
-          )
-        );
+        containsPromise = true;
       }
 
       values.push(state.value);
     }
 
-    return new ValueOrPromise(() => values);
+    if (containsPromise) {
+      return new ValueOrPromise(() => Promise.all(values));
+    }
+
+    return new ValueOrPromise(() => values as Array<T>);
   }
 }
