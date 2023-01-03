@@ -76,7 +76,7 @@ export class ValueOrPromise<T> {
         typeof onFulfilled === 'function' ? onFulfilled : undefined;
 
       return onFulfilledFn === undefined
-        ? new ValueOrPromise(() => (state.value as unknown) as TResult1)
+        ? new ValueOrPromise(() => state.value as unknown as TResult1)
         : new ValueOrPromise(() => onFulfilledFn(state.value as T));
     } catch (e) {
       return new ValueOrPromise(() => onRejectedFn(e));
