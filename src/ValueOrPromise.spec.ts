@@ -59,4 +59,25 @@ describe('ValueOrPromise', () => {
     const all = ValueOrPromise.all([valueOrPromise1, valueOrPromise2]);
     expect(await all.resolve()).toEqual([1, 2]);
   });
+
+  it('works with ValueOrPromise.all for mixture of sync and async errors', async () => {
+    const valueOrPromise1 = new ValueOrPromise(() => {
+      throw new Error('Error');
+    });
+    const valueOrPromise2 = new ValueOrPromise(() => Promise.reject('Error'));
+    let handled = false;
+    const promise = valueOrPromise2.resolve();
+    const originalThen = promise.then;
+    promise.then = (onFullfilled, onRejected) => {
+      handled = true;
+      return originalThen(onFullfilled, onRejected);
+    };
+    const all = ValueOrPromise.all([valueOrPromise1, valueOrPromise2]);
+    try {
+      await all.resolve();
+    } catch {
+      // Ignore errors
+    }
+    expect(handled).toEqual(true);
+  });
 });

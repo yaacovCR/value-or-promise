@@ -199,6 +199,8 @@ export class ValueOrPromise<T> {
   public static all<T>(
     valueOrPromises: ReadonlyArray<ValueOrPromise<T>>
   ): ValueOrPromise<Array<T>> {
+    let rejected = false;
+    let reason: unknown;
     let containsPromise = false;
 
     const values: Array<T | PromiseLike<T>> = [];
@@ -206,9 +208,12 @@ export class ValueOrPromise<T> {
       const state = valueOrPromise.state;
 
       if (state.status === 'rejected') {
-        return new ValueOrPromise(() => {
-          throw state.value;
-        });
+        if (rejected) {
+          continue;
+        }
+        rejected = true;
+        reason = state.value;
+        continue;
       }
 
       if (state.status === 'pending') {
@@ -219,6 +224,16 @@ export class ValueOrPromise<T> {
     }
 
     if (containsPromise) {
+      if (rejected) {
+        Promise.all(values).catch(() => {
+          // Ignore errors
+        });
+
+        return new ValueOrPromise(() => {
+          throw reason;
+        });
+      }
+
       return new ValueOrPromise(() => Promise.all(values));
     }
 
